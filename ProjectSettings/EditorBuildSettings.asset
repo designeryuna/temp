@@ -7,3 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/_Scenes/Menu.unity
+  - enabled: 1
+    path: Assets/_Scenes/BuildPack.unity
+  - enabled: 1
+    path: Assets/_Scenes/1-1.unity

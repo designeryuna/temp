@@ -1,0 +1,18 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class Satellite : MonoBehaviour 
+{
+    [SerializeField]
+    ControllerLevel1 controller;
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(other.gameObject.tag);
+        if(other.gameObject.tag == "Asteroid")
+        {
+            controller.points -= 2;
+            Destroy(other.gameObject);
+        }
+    }
+}
