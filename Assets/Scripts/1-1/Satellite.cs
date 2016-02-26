@@ -8,7 +8,6 @@ public class Satellite : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.tag);
         if(other.gameObject.tag == "Asteroid")
         {
             controller.points -= 2;

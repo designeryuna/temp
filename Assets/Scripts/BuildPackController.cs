@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class BuildPackController : MonoBehaviour 
 {
     int screen = 0;
+    public int totalPoints = 0;
 
     void Awake()
     {
@@ -22,6 +23,10 @@ public class BuildPackController : MonoBehaviour
                 SceneManager.LoadScene("1-1");
                 screen++;
             }
+        }
+        else
+        {
+            GUI.Label(new Rect(Screen.width - 200, 10, 200, 25), "Total Points: " + totalPoints.ToString());
         }
     }
 }
