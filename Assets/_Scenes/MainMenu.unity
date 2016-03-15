@@ -185,14 +185,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad070f25176eb9c4bbd4ef64cddaf391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: {fileID: 2800000, guid: 33a7d461557c6be4ebcdb7033229ca63, type: 3}
+  locked: {fileID: 2800000, guid: 51a9c57d37678874ba8ea65da830736d, type: 3}
   activeScreen: 0
   trivia:
   - none
   - first trivia
   - second trivia
   - third trivia
-  - 
+  - hello, test
   - 
   - 
   - 

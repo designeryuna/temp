@@ -18,6 +18,18 @@ public class Menu : MonoBehaviour
     {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         smallFont = gameController.smallFont;
+        if(gameController.toLevelSelect)
+        {
+            gameController.toLevelSelect = false;
+            activeScreen = 2;
+        }
+        if(gameController.doneWithMiniGame)
+        {
+            gameController.doneWithMiniGame = false;
+            activeScreen = -1;
+            miniGameToLoad = gameController.lastMiniGame;
+            miniGameToLoad++;
+        }
     }
 
     void OnGUI()
@@ -92,6 +104,7 @@ public class Menu : MonoBehaviour
                     if (GUI.Button(new Rect(Screen.width - 125, Screen.height - 50, 125, 50), "Next"))
                     {
                         gameController.inGame = true;
+                        gameController.lastMiniGame = miniGameToLoad;
                         SceneManager.LoadScene(miniGameToLoad.ToString());
                     }
                     break;

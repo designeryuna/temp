@@ -51,7 +51,8 @@ public class Bar : MonoBehaviour
         {
             done = true;
             gameController.totalScore = timer * 20;
-
+            gameController.doneWithMiniGame = true;
+            gameController.won = true;
         }
     }
 }

@@ -38,7 +38,8 @@ public class ControllerLevel1 : MonoBehaviour
         if(timer <= 0)
         {
             gameController.totalScore = points;
-
+            gameController.doneWithMiniGame = true;
+            gameController.won = true;
         }
 	}
 
