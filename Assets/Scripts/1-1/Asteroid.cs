@@ -12,6 +12,15 @@ public class Asteroid : MonoBehaviour
 
     void OnMouseDown()
     {
+        StartCoroutine(changeColour());
+    }
+
+    IEnumerator changeColour()
+    {
+        speed = 0;
+        this.GetComponent<BoxCollider2D>().enabled = false;
+        this.GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 }

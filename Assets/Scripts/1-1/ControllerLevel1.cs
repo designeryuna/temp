@@ -6,7 +6,7 @@ public class ControllerLevel1 : MonoBehaviour
 {
     [SerializeField]
     Asteroid asteroid;
-    BuildPackController mainController;
+    GameController gameController;
     Vector2 randomPosition;
     bool waitingForSpawn = false, minigameTimerWait = false;
     public int points = 100;
@@ -17,7 +17,7 @@ public class ControllerLevel1 : MonoBehaviour
     
     void Start()
     {
-        mainController = GameObject.Find("BuildPackController").GetComponent<BuildPackController>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
 	void Update () 
@@ -37,8 +37,8 @@ public class ControllerLevel1 : MonoBehaviour
 
         if(timer <= 0)
         {
-            mainController.totalPoints += points;
-            SceneManager.LoadScene("1-2");
+            gameController.totalScore = points;
+
         }
 	}
 

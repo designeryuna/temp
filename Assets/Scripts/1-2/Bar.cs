@@ -13,11 +13,11 @@ public class Bar : MonoBehaviour
     [SerializeField]
     int timer;
     bool minigameTimerWait = false, done = false;
-    BuildPackController mainController;
+    GameController gameController;
 
     void Start()
     {
-        mainController = GameObject.Find("BuildPackController").GetComponent<BuildPackController>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     void FixedUpdate()
@@ -50,8 +50,8 @@ public class Bar : MonoBehaviour
         if(currentStatus >= 150 && !done)
         {
             done = true;
-            mainController.totalPoints += timer * 20;
-            SceneManager.LoadScene("1-3");
+            gameController.totalScore = timer * 20;
+
         }
     }
 }

@@ -28,5 +28,10 @@ public class BuildPackController : MonoBehaviour
         {
             GUI.Label(new Rect(Screen.width - 200, 10, 200, 25), "Total Points: " + totalPoints.ToString());
         }
+        if (GUI.Button(new Rect(0, 0, 100, 50), "Back"))
+        {
+            Destroy(this.gameObject);
+            SceneManager.LoadScene("Menu");
+        }
     }
 }
