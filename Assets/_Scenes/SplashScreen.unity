@@ -187,6 +187,12 @@ MonoBehaviour:
     m_StretchWidth: 1
     m_StretchHeight: 0
   totalScore: 0
+  toLevelSelect: 0
+  doneWithMiniGame: 0
+  won: 0
+  lastMiniGame: 0
+  doneWithAnimation: 0
+  awesomeScript: {fileID: 11492110, guid: dd19999358f4c994286bfb80e8d22d31, type: 2}
 --- !u!1 &801287644
 GameObject:
   m_ObjectHideFlags: 0

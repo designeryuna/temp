@@ -22,14 +22,17 @@ public class Bar : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (currentStatus > 0)
+        if (!done)
         {
-            currentStatus -= reduceValue;
-        }
+            if (currentStatus > 0)
+            {
+                currentStatus -= reduceValue;
+            }
 
-        if (!minigameTimerWait)
-        {
-            StartCoroutine(minigameTimer());
+            if (!minigameTimerWait)
+            {
+                StartCoroutine(minigameTimer());
+            }
         }
     }
 
@@ -44,8 +47,11 @@ public class Bar : MonoBehaviour
     void OnGUI()
     {
         GUI.DrawTexture(new Rect(Screen.width / 2 - 77, Screen.height / 5 - 2, 150, 29), emptyBar);
-        GUI.DrawTexture(new Rect(Screen.width / 2 - 77, Screen.height / 5 - 2, currentStatus, 29), fullBar);
-        GUI.Label(new Rect(Screen.width / 2, 0, 150, 25), "Time Left: " + timer.ToString());
+        if (!done)
+        {
+            GUI.DrawTexture(new Rect(Screen.width / 2 - 77, Screen.height / 5 - 2, currentStatus, 29), fullBar);
+            GUI.Label(new Rect(Screen.width / 2, 0, 150, 25), "Time Left: " + timer.ToString());
+        }
 
         if(currentStatus >= 150 && !done)
         {

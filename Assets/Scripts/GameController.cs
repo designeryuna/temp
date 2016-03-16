@@ -12,6 +12,10 @@ public class GameController : MonoBehaviour
     public int totalScore;
     public bool toLevelSelect = false, doneWithMiniGame = false, won = false;
     public int lastMiniGame;
+    public bool doneWithAnimation = false;
+    bool once = false;
+    [SerializeField]
+    AwesomeScript awesomeScript;
 
     void Awake ()
     {
@@ -20,14 +24,17 @@ public class GameController : MonoBehaviour
     
     void OnGUI()
     {
-        if(inGame && !paused)
+        if (!doneWithMiniGame)
         {
-            if (GUI.Button(new Rect(0, 0, 50, 50), pauseButton, smallFont))
+            if (inGame && !paused)
             {
-                paused = true;
+                if (GUI.Button(new Rect(0, 0, 50, 50), pauseButton, smallFont))
+                {
+                    paused = true;
+                }
             }
         }
-        if(paused)
+        if (paused)
         {
             Time.timeScale = 0.0f; // pause game
             if (GUI.Button(new Rect(0, 0, 50, 50), playButton, smallFont))
@@ -47,12 +54,18 @@ public class GameController : MonoBehaviour
             Time.timeScale = 1; // unpause game
         }
 
-        if(doneWithMiniGame)
+        if(doneWithMiniGame && ! once)
         {
-            Time.timeScale = 0.0f;
+            once = true;
+            Instantiate(awesomeScript);
+        }
+
+        if(doneWithAnimation && doneWithMiniGame)
+        {
             //GUI.TextArea(new Rect(0, 0, Screen.width, Screen.height),"");
             if (GUI.Button(new Rect(0, 100, 50, 50), "Back"))
             {
+                once = false;
                 paused = false;
                 toLevelSelect = true;
                 inGame = false;
@@ -64,6 +77,7 @@ public class GameController : MonoBehaviour
                 GUI.Label(new Rect(Screen.width / 2, 150, 100, 50), totalScore.ToString());
                 if (GUI.Button(new Rect(Screen.width / 1.3f, Screen.height / 2, 150, 50), "Next Level"))
                 {
+                    once = false;
                     Time.timeScale = 1;
                     SceneManager.LoadScene("MainMenu");
                 }
@@ -73,6 +87,7 @@ public class GameController : MonoBehaviour
                 GUI.Label(new Rect(Screen.width / 2, 50, 100, 50), "Try Again");
                 if (GUI.Button(new Rect(Screen.width / 1.3f, Screen.height / 2, 150, 50), "Restart"))
                 {
+                    once = false;
                     Time.timeScale = 1;
                     doneWithMiniGame = false;
                     SceneManager.LoadScene("MainMenu");

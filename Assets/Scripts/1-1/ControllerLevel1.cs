@@ -14,6 +14,7 @@ public class ControllerLevel1 : MonoBehaviour
     int maxSpawn = 50, timer = 20;
     [SerializeField]
     float[] randomSize = new float[2], randomSpawnSpeed = new float[2], randomSpeed = new float[2];
+    bool end = false;
     
     void Start()
     {
@@ -22,24 +23,34 @@ public class ControllerLevel1 : MonoBehaviour
 
 	void Update () 
 	{
-        if(!waitingForSpawn && maxSpawn > 0)
+        if (!end)
         {
-            int randomHeight = UnityEngine.Random.Range(-4, 4);
-            randomPosition = new Vector2(this.transform.position.x, randomHeight);
-            float randomSpawnSpeedDone = UnityEngine.Random.Range(randomSpawnSpeed[0], randomSpawnSpeed[1]);
-            StartCoroutine(waitForSec(randomSpawnSpeedDone, randomPosition));
-        }
+            if (!waitingForSpawn && maxSpawn > 0)
+            {
+                int randomHeight = UnityEngine.Random.Range(-4, 4);
+                randomPosition = new Vector2(this.transform.position.x, randomHeight);
+                float randomSpawnSpeedDone = UnityEngine.Random.Range(randomSpawnSpeed[0], randomSpawnSpeed[1]);
+                StartCoroutine(waitForSec(randomSpawnSpeedDone, randomPosition));
+            }
 
-        if(!minigameTimerWait)
-        {
-            StartCoroutine(minigameTimer());
-        }
+            if (!minigameTimerWait)
+            {
+                StartCoroutine(minigameTimer());
+            }
 
-        if(timer <= 0)
-        {
-            gameController.totalScore = points;
-            gameController.doneWithMiniGame = true;
-            gameController.won = true;
+
+            if (timer <= 0)
+            {
+                gameController.totalScore = points;
+                gameController.doneWithMiniGame = true;
+                gameController.won = true;
+                end = true;
+                GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+                foreach (GameObject temp in asteroids)
+                {
+                    temp.SetActive(false);
+                }
+            }
         }
 	}
 
@@ -53,8 +64,11 @@ public class ControllerLevel1 : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(Screen.width / 2, 0, 40, 40), points.ToString());
-        GUI.Label(new Rect(Screen.width / 2 + 60, 0, 140, 40), "Time Left: " + timer.ToString());
+        if (!end)
+        {
+            GUI.Label(new Rect(Screen.width / 2, 0, 40, 40), points.ToString());
+            GUI.Label(new Rect(Screen.width / 2 + 60, 0, 140, 40), "Time Left: " + timer.ToString());
+        }
     }
 
     IEnumerator waitForSec(float sec, Vector2 randomPosition)
